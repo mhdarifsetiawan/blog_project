@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-// const authRouter = require("./src/auth/auth.route");
+const authRouter = require("./src/auth/auth.route");
 const userRouter = require("./src/user/user.route");
 const app = express();
 
@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(userRouter);
-// app.use(authRouter);
+app.use(authRouter);
 
 app.listen(port, () =>
   console.log("> Server is up and running on port : " + port)
