@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
 const userRepo = require("./user.repo");
 
-const createUser = async ({ fullname, email, password }) => {
+const createUser = async ({ fullName, email, password }) => {
   const hashPassword = await bcrypt.hash(password, 10);
-  return userRepo.createUser({ fullname, email, password: hashPassword });
+  return userRepo.createUser({ fullName, email, password: hashPassword });
 };
 
 const loginUser = async (email) => {
