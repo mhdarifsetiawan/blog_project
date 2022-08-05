@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("hello from simple server :)");
+  res.send(`Simple server - Port (${port})`);
 });
 
 app.use(userRouter);
