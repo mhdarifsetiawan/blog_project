@@ -7,14 +7,14 @@ const example = (req, res) => {
   return res.json("Mau ngapain mas?");
 };
 
-const chekAuth = async (req, res) => {
+const checkAuth = async (req, res) => {
   const { email, password } = req.body;
-  const existUser = await authService.getUserByEmail({ email });
+  const existUser = await authService.getUserByEmail(email);
 
-  //   kalau gak ada email yang terdaftar response not found
+  //   ! if email not exixt -> response not found
   if (!existUser) return res.status(404).json({ message: "User not found" });
 
-  //   kalau ada cek password
+  //   if email found -> chek password
   const isPasswordCorrect = await bcrypt.compare(password, existUser.password);
   if (isPasswordCorrect) {
     // generate jwt token
@@ -36,7 +36,7 @@ const chekAuth = async (req, res) => {
 
 const authController = {
   example,
-  chekAuth,
+  checkAuth,
 };
 
 module.exports = authController;

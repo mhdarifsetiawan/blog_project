@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const authRouter = require("./src/auth/auth.route");
+const tokenVerification = require("./src/middleware/token.verification");
 const userRouter = require("./src/user/user.route");
 const app = express();
 
