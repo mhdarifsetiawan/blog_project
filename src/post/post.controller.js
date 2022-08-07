@@ -3,7 +3,8 @@ const { Post } = require("../database/models");
 
 // Get all posts
 const getAllPosts = async (req, res) => {
-  const userId = req.body;
+  const { userId } = req.body;
+  console.log(userId);
   try {
     const getPosts = await postService.getAllPosts(userId);
     console.log(getPosts);

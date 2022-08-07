@@ -3,10 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authService = require("./auth.service");
 
-const example = (req, res) => {
-  return res.json("Mau ngapain mas?");
-};
-
 const checkAuth = async (req, res) => {
   const { email, password } = req.body;
   const existUser = await authService.getUserByEmail(email);
@@ -30,12 +26,11 @@ const checkAuth = async (req, res) => {
 
     return res.json({ accessToken: token });
   } else {
-    return res.send("Login failed");
+    return res.send("Login failed! email/password is invalid");
   }
 };
 
 const authController = {
-  example,
   checkAuth,
 };
 
