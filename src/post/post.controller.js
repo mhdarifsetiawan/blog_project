@@ -4,12 +4,25 @@ const { Post } = require("../database/models");
 // Get all posts
 const getAllPosts = async (req, res) => {
   const { userId } = req.body;
-  try {
-    const getPosts = await postService.getAllPosts(userId);
-    console.log(getPosts);
-    return res.json(getPosts);
-  } catch (error) {
-    return res.status(500).json({ message: "post not found!" });
+
+  // view posts by user auth / user dashboard
+  if (userId) {
+    try {
+      // if post found
+      const getPosts = await postService.getAllPosts(userId);
+      if (getPosts.length !== 0) {
+        return res.json(getPosts);
+        // if post not found
+      } else {
+        return res.send("Post not found!");
+      }
+    } catch (error) {
+      return res.status(500).json({ message: "ERROR" });
+    }
+    // view all posts / homepage
+  } else {
+    const getPublicPosts = await postService.getPublicPosts();
+    return res.json(getPublicPosts);
   }
 };
 

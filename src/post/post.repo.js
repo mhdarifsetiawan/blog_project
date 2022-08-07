@@ -2,9 +2,13 @@ const { Post } = require("../database/models");
 
 // Get all post
 const getAllPosts = async (userId) => {
-  return await Post.findOne({
+  return await Post.findAll({
     where: { user_id: userId },
   });
+};
+
+const getPublicPosts = async () => {
+  return await Post.findAll();
 };
 
 // Create post
@@ -22,6 +26,7 @@ const editPost = async ({ postId, title, image, body, userId }) => {
 
 const postRepo = {
   getAllPosts,
+  getPublicPosts,
   createPost,
   editPost,
 };
