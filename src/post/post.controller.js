@@ -4,7 +4,6 @@ const { Post } = require("../database/models");
 // Get all posts
 const getAllPosts = async (req, res) => {
   const { userId } = req.body;
-  console.log(userId);
   try {
     const getPosts = await postService.getAllPosts(userId);
     console.log(getPosts);
@@ -34,6 +33,7 @@ const createPost = async (req, res) => {
   }
 };
 
+//Edit post
 const editPost = async (req, res) => {
   const { postId } = req.params;
   const { title, image, body } = req.body;
@@ -41,7 +41,6 @@ const editPost = async (req, res) => {
   const userId = authUser.id;
   const posts = await Post.findOne({ where: { id: postId } });
 
-  // return res.json(posts);
   if (userId !== posts.user_id) {
     return res.send("kamu gak boleh edit artikel yang bukan milikmu ya!");
   } else {
