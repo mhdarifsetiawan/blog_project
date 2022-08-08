@@ -5,7 +5,7 @@ const postRouter = express.Router();
 const postController = require("./post.controller");
 
 // API - Get all posts
-postRouter.get("/posts", postController.getAllPosts);
+postRouter.get("/posts/:userId", postController.getAllPosts);
 
 // API - Create post
 postRouter.post("/posts", tokenVerification, postController.createPost);

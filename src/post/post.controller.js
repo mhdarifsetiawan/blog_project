@@ -3,7 +3,7 @@ const { Post } = require("../database/models");
 
 // Get all posts
 const getAllPosts = async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
 
   // view posts by user auth / user dashboard
   if (userId) {
