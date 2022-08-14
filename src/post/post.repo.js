@@ -1,19 +1,26 @@
+const { NUMBER } = require("sequelize");
 const { Post } = require("../database/models");
 
 // Get all post
-const getAllPosts = async (userId) => {
+const getAllPosts = async ({ writer, sort = "asc" }) => {
   return await Post.findAll({
-    where: { user_id: userId },
+    where: { user_id: writer },
+    order: [["id", sort]],
   });
 };
 
-const getPublicPosts = async () => {
-  return await Post.findAll();
+const getPublicPosts = async ({ sort = "asc" }) => {
+  return await Post.findAll({ order: [["id", sort]], offset: 2, limit: 2 });
 };
 
 // Create post
 const createPost = async ({ title, image, body, userId }) => {
   return await Post.create({ title, image, body, user_id: userId });
+};
+
+// Post detail (get post detail)
+const postDetail = async ({ postId }) => {
+  return await Post.findOne({ where: { id: postId } });
 };
 
 // Edit post
@@ -28,6 +35,7 @@ const postRepo = {
   getAllPosts,
   getPublicPosts,
   createPost,
+  postDetail,
   editPost,
 };
 

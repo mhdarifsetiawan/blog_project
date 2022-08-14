@@ -8,7 +8,9 @@ const checkAuth = async (req, res) => {
   const existUser = await authService.getUserByEmail(email);
 
   //   ! if email not exixt -> response not found
-  if (!existUser) return res.status(404).json({ message: "User not found" });
+  if (!existUser)
+    // if user not found, error 400 with message invalid email/password
+    return res.status(400).json({ message: "Invalid email/password!" });
 
   //   if email found -> chek password
   const isPasswordCorrect = await bcrypt.compare(password, existUser.password);
@@ -26,7 +28,7 @@ const checkAuth = async (req, res) => {
 
     return res.json({ accessToken: token });
   } else {
-    return res.send("Login failed! email/password is invalid");
+    return res.status(400).send({ message: "Invalid email/password!" });
   }
 };
 

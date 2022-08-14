@@ -16,20 +16,13 @@ const createUser = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => {
-  const { email } = req.body;
-  const users = await userService.loginUser(email);
-  res.json(users);
-};
-
 // Edit User data
 const editUser = async (req, res) => {
-  const authUser = req.auth;
-  const userId = authUser.id;
+  const { userId } = req.params;
   const userData = await authService.getUserById(userId);
   const { fullName, password } = req.body;
 
-  if (userId !== userData.id) {
+  if (req.auth.id !== userData.id) {
     return res.send("Forbidden");
   } else {
     try {
@@ -47,7 +40,6 @@ const editUser = async (req, res) => {
 
 const userController = {
   createUser,
-  loginUser,
   editUser,
 };
 

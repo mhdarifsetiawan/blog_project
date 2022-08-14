@@ -24,6 +24,12 @@ const userController = require("./user.controller");
  *              fullName:
  *                type: string
  *                example: Your Name
+ *              email:
+ *                type: string
+ *                example: email@gmail.com
+ *              password:
+ *                type: string
+ *                example: 123qwe!Asd
  *    responses:
  *      '200':
  *        description: Registration success
@@ -51,24 +57,33 @@ userRouter.post(
  *      - bearerAuth: []
  *    tags:
  *      - user
- *    summary: API untuk edit user
+ *    summary: API edit user
+ *    description: This can only be done by the logged in user.
  *    parameters:
- *      - in: path
- *        name: userId
+ *      - name: userId
+ *        in: path
  *        required: true
+ *        description: userId that need to be updated
+ *        schema:
+ *          type: integer
  *    requestBody:
- *      required: true
+ *      description: Update an existent user in the database (only "fullName" and "password" can be update)
  *      content:
  *        application/json:
- *          scheme:
+ *          schema:
  *            type: object
  *            properties:
  *              fullName:
  *                type: string
- *                example: Muhammad Arif setiawan
+ *                example: your full name
+ *              password:
+ *                type: string
+ *                example: 12wdABC/?!
  *    responses:
  *      '200':
- *        description: registration berhasil
+ *        description: Modified successfully
+ *      '401':
+ *        description: You don't have access to this action
  */
 userRouter.put("/user/:userId", tokenVerification, userController.editUser);
 

@@ -13,7 +13,8 @@ const loginUser = async (email) => {
 
 // Edit User data
 const editUser = async ({ userId, fullName, password }) => {
-  return userRepo.editUser({ userId, fullName, password });
+  const hashPassword = await bcrypt.hash(password, 10);
+  return userRepo.editUser({ userId, fullName, password: hashPassword });
 };
 
 const userService = {

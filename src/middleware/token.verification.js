@@ -5,9 +5,8 @@ const tokenVerification = async (req, res, next) => {
   // Ambil token yang ada di header
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
-  console.log(token);
   if (!token) {
-    return res.send("Missing authorization header");
+    return res.status(401).send("Missing authorization header");
   }
 
   try {
