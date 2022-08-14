@@ -1,5 +1,6 @@
 const { User } = require("../database/models");
 
+// Create User
 const createUser = async ({ fullName, email, password }) => {
   return await User.create({
     fullName,
@@ -8,16 +9,14 @@ const createUser = async ({ fullName, email, password }) => {
   });
 };
 
-// login
-const loginUser = async (email, password) => {
-  return await User.findOne({
-    where: { email: email, password: password },
-  });
+// Edit User data
+const editUser = async ({ userId, fullName, password }) => {
+  return await User.update({ fullName, password }, { where: { id: userId } });
 };
 
 const userRepo = {
   createUser,
-  loginUser,
+  editUser,
 };
 
 module.exports = userRepo;

@@ -21,7 +21,7 @@ const checkAuth = async (req, res) => {
         email: existUser.email,
       },
       process.env.JWT_SECRET_TOKEN,
-      { expiresIn: "1d" }
+      { expiresIn: "3d" }
     );
 
     return res.json({ accessToken: token });
