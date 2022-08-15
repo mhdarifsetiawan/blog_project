@@ -75,7 +75,7 @@ userRouter.post(
  *            properties:
  *              fullName:
  *                type: string
- *                example: your full name
+ *                example: Your full name
  *              password:
  *                type: string
  *                example: 12wdABC/?!
@@ -83,6 +83,8 @@ userRouter.post(
  *      '200':
  *        description: Modified successfully
  *      '401':
+ *        description: Unauthorized, please login
+ *      '403':
  *        description: You don't have access to this action
  */
 userRouter.put("/user/:userId", tokenVerification, userController.editUser);
