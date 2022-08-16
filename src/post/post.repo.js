@@ -10,7 +10,7 @@ const getAllPosts = async ({ writer, sort = "asc" }) => {
 };
 
 const getPublicPosts = async ({ sort = "asc" }) => {
-  return await Post.findAll({ order: [["id", sort]], offset: 2, limit: 2 });
+  return await Post.findAll({ order: [["id", sort]] });
 };
 
 // Create post
