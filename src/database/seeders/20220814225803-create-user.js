@@ -1,7 +1,7 @@
 "use strict";
 
 const bcrypt = require("bcrypt");
-const defaultPassword = "password";
+const defaultPassword = "Password@123";
 const saltRounds = 10;
 
 module.exports = {

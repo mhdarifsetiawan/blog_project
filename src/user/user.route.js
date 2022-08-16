@@ -16,6 +16,7 @@ const userController = require("./user.controller");
  *    description: API for user registration
  *    requestBody:
  *      required: true
+ *      description: password is at least 8 characters or more, and must contain at least 1 uppercase letter, lowercase letter, number, and symbol
  *      content:
  *        application/json:
  *          schema:
