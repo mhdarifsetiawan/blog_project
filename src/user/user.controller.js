@@ -22,7 +22,9 @@ const editUser = async (req, res) => {
   // const userData = await authService.getUserById(userId);
   const { fullName, password } = req.body;
 
-  if (req.auth.id !== userId) {
+  // return res.json(req.auth.id);
+
+  if (req.auth.id != userId) {
     return res
       .status(403)
       .json({ message: "You don't have access to this action!" });
